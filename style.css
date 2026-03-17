@@ -654,11 +654,11 @@ body {
 }
 
 #page-4 .roulette-track {
-    width: 100%;
+    width: max-content;
     display: flex;
     gap: 1rem;
     will-change: transform;
-    animation: roulette-left-to-right 18s linear infinite;
+    animation: roulette-scroll 26s linear infinite;
 }
 
 #page-4 .roulette-group {
@@ -688,9 +688,9 @@ body {
     filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
 }
 
-@keyframes roulette-left-to-right {
-    from { transform: translateX(-20%); }
-    to   { transform: translateX(0%); }
+@keyframes roulette-scroll {
+    from { transform: translateX(0%); }
+    to   { transform: translateX(-50%); }
 }
 
 #page-4 .page4-contact {

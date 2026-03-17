@@ -360,6 +360,17 @@
         startIntro();
     });
 
+    // Make the page-4 roulette seamless by duplicating the track content once.
+    // The CSS animation scrolls by -50% (one copy width) for a perfect loop.
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.querySelector('#page-4 .roulette-track');
+        if (!track) return;
+        if (track.dataset.duplicated === '1') return;
+        track.dataset.duplicated = '1';
+        const clones = Array.from(track.children).map((n) => n.cloneNode(true));
+        for (const c of clones) track.appendChild(c);
+    }, { passive: true });
+
     window.addEventListener('wheel', (e) => {
         if (e.deltaY >= 0) return;
         if (!page2) return;
