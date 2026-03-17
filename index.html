@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+Math&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header id="top-nav" role="banner">
+        <nav class="top-nav-inner" aria-label="Main">
+            <button class="top-nav-item" type="button" data-nav="home">Home</button>
+            <button class="top-nav-item" type="button" data-nav="about">About</button>
+            <button class="top-nav-item" type="button" data-nav="products">Products</button>
+            <button class="top-nav-item" type="button" data-nav="family">Family</button>
+            <button class="top-nav-item" type="button" data-nav="contact">Contact</button>
+        </nav>
+    </header>
+
+    <canvas id="sequence-canvas"></canvas>
+
+    <div id="loader">
+        <div class="loader-label">Loading</div>
+        <div class="loader-bar-track">
+            <div class="loader-bar-fill" id="loader-fill"></div>
+        </div>
+    </div>
+
+    <div id="intro-text">
+        <span class="word-best">Best</span> Served Chilled
+    </div>
+
+    <!-- Text on the right: appears frames 230–260, fades out from 270 -->
+    <div id="frame-text-right">
+        <div class="frame-block">
+            <div class="frame-line"></div>
+            <div class="frame-content">
+                <h2 class="frame-title"><span class="frame-title-first">Crafted</span> <span class="frame-title-rest">to
+                        refresh</span></h2>
+                <p class="frame-body">
+                    From the very first bubble to the last, Coca-Cola is more than a drink — it's a moment. Crafted with
+                    the same timeless recipe that has sparked joy across generations, every bottle carries the promise
+                    of something simple yet extraordinary: pure, unapologetic refreshment.
+                    We believe that the best moments in life deserve the best companion. Whether it's the crack of ice
+                    on a summer afternoon, the clink of a glass shared with someone you love, or that first cold sip
+                    after a long day — Coca-Cola is there, exactly as it should be.
+                    Made with care. Served with intention. Crafted to refresh you, body and soul.
+                    Because some things never need to change — they only need to be enjoyed..
+                </p>
+                <button class="frame-cta" type="button">Learn more</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endcards between orange overlay and green section -->
+    <div id="frame-callout-left">
+        <div class="frame-block">
+            <div class="frame-line"></div>
+            <div class="frame-content">
+                <h2 class="frame-title"><span class="frame-title-first">Over a Century</span> <span
+                        class="frame-title-rest">of the Same Promise</span></h2>
+                <p class="frame-body">
+                    Born in 1886. Loved ever since.
+                    Coca-Cola was never just a drink. It was an idea — that a single moment of refreshment could bring
+                    people together. Over 130 years later, that idea hasn't changed. Same formula. Same feeling. Shared
+                    by billions, yet always personal.
+                    Some things are worth keeping exactly as they are.
+                </p>
+                <button class="frame-cta" type="button">Learn more</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="frame-callout-right">
+        <div class="frame-block">
+            <div class="frame-line"></div>
+            <div class="frame-content">
+                <h2 class="frame-title"><span class="frame-title-first">Your</span> <span
+                        class="frame-title-rest">moment is waiting</span></h2>
+                <p class="frame-body">
+                    Find the cold. Find the pause. Find your Coca-Cola.
+                </p>
+                <div class="frame-cta-row" role="group" aria-label="Explore options">
+                    <button class="frame-cta" type="button">Buy Now</button>
+                    <button class="frame-cta" type="button" data-scroll-to="page-2">Explore Zero</button>
+                    <button class="frame-cta" type="button" data-scroll-to="page-3">Explore Cherry Flavor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right navbar: circles + vertical lines, active by section -->
+    <nav id="section-nav" aria-label="Page sections">
+        <span class="section-nav-dot is-active" data-section="1"></span>
+        <span class="section-nav-line"></span>
+        <span class="section-nav-dot" data-section="2"></span>
+        <span class="section-nav-line"></span>
+        <span class="section-nav-dot" data-section="3"></span>
+        <span class="section-nav-line"></span>
+        <span class="section-nav-dot" data-section="4"></span>
+        <span class="section-nav-line"></span>
+        <span class="section-nav-dot" data-section="5"></span>
+        <span class="section-nav-line"></span>
+        <span class="section-nav-dot" data-section="6"></span>
+    </nav>
+
+    <!-- Spacer to create scroll range for the canvas sequence -->
+
+    <div id="scroll-spacer" aria-hidden="true"></div>
+    <div id="endcard-buffer" aria-hidden="true"></div>
+    <div id="page-2">
+        <div class="page2-content">
+            <h1 class="page2-title">
+                <span class="page2-title-line">Coca Cola</span>
+                <span class="page2-title-line word-zero">Zero</span>
+            </h1>
+            <div class="page2-articles">
+                <p class="page2-article">
+                    Coca-Cola Zero is built for balance. Full flavor, zero sugar, no compromise. It fits seamlessly into a fast, active lifestyle. Clean taste, crisp finish, always refreshing. Whether mid-workout or on the move, it keeps up. Simple choice, modern energy.
+                </p>
+                <p class="page2-article">
+                    Zero means more than just no sugar. It’s about cutting distractions and keeping it clean. Pure taste, no excess, just what matters. A refined take on a classic experience. Less noise, more focus in every sip. Modern refreshment, stripped to essentials.
+                </p>
+            </div>
+            <button class="page-buy page2-buy" type="button">Buy now</button>
+        </div>
+    </div>
+    <div id="page-3">
+        <div class="page3-content">
+            <h1 class="page3-title">
+                <span class="page3-title-line">Coca Cola</span>
+                <span class="page3-title-line">Cherry</span>
+            </h1>
+            <div class="page3-articles">
+                <p class="page3-article">
+                    Placeholder article for Cherry Coke. Replace with your final copy.
+                </p>
+                <p class="page3-article">
+                    Placeholder article for Cherry Coke. Replace with your final copy.
+                </p>
+            </div>
+            <button class="page-buy page3-buy" type="button">Buy now</button>
+        </div>
+    </div>
+    <div id="page-4">
+        <div class="page4-tint">
+        <div class="page4-inner">
+            <section class="page4-section page4-gallery" aria-label="Coca-Cola family gallery">
+                <div class="page4-gallery-grid">
+                    <article class="page4-card">
+                        <div class="page4-thumb" aria-hidden="true">
+                            <img class="page4-thumb-img" src="articles/office.webp" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="page4-card-text">Article Title 1</div>
+                    </article>
+                    <article class="page4-card">
+                        <div class="page4-thumb" aria-hidden="true">
+                            <img class="page4-thumb-img" src="articles/inside-office.webp" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="page4-card-text">Article Title 2</div>
+                    </article>
+                    <article class="page4-card">
+                        <div class="page4-thumb" aria-hidden="true">
+                            <img class="page4-thumb-img" src="articles/water.webp" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="page4-card-text">Article Title 3</div>
+                    </article>
+                    <article class="page4-card">
+                        <div class="page4-thumb" aria-hidden="true">
+                            <img class="page4-thumb-img" src="articles/we-are-coke.jpg" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="page4-card-text">Article Title 4</div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="page4-section page4-roulette" aria-label="Coca-Cola family roulette">
+                <div class="roulette-track" aria-hidden="true">
+                    <div class="roulette-group">
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/ades-logo.webp" alt="Ades logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/bodyarmor-logo.webp" alt="BODYARMOR logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/coca-cola-logo.webp" alt="Coca-Cola logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/dietCoke_transparency.webp" alt="Diet Coke logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/fanta-logo.webp" alt="Fanta logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/fuze-tea-logo.webp" alt="Fuze Tea logo" loading="lazy" decoding="async"></div>
+                    </div>
+                    <div class="roulette-group">
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/Georgia_coffee_logo_924.webp" alt="Georgia Coffee logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/innocent-logo.webp" alt="Innocent logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/jackdaniels-coca-cola-logo.webp" alt="Jack Daniel's & Coca-Cola logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/sprite-logo.webp" alt="Sprite logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/topo-chico-logo.webp" alt="Topo Chico logo" loading="lazy" decoding="async"></div>
+                        <div class="roulette-item"><img class="roulette-logo" src="logos/vitaminwater-logo.webp" alt="vitaminwater logo" loading="lazy" decoding="async"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page4-section page4-contact" aria-label="Contact">
+                <h2 class="page4-contact-title">Contact</h2>
+                <ul class="page4-contact-list">
+                    <li class="page4-contact-item"><span class="k">Support</span><span class="v">support@example.com</span></li>
+                    <li class="page4-contact-item"><span class="k">Careers</span><span class="v">careers@example.com</span></li>
+                </ul>
+
+                <form class="page4-contact-form" action="#" method="post">
+                    <label class="page4-field">
+                        <span class="page4-label">Name</span>
+                        <input class="page4-input" name="name" type="text" autocomplete="name" />
+                    </label>
+                    <label class="page4-field">
+                        <span class="page4-label">Email</span>
+                        <input class="page4-input" name="email" type="email" autocomplete="email" />
+                    </label>
+                    <button class="page4-submit" type="submit">Submit</button>
+                </form>
+            </section>
+        </div>
+        </div>
+    </div>
+    <script src="animation.js"></script>
+
+</body>
+
+</html>
