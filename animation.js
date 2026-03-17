@@ -300,8 +300,7 @@
         toggleFade(page3Title, inView(page3Rect));
         toggleFade(page3Articles, inView(page3Rect));
 
-        const page3BuyRect = page3Buy ? page3Buy.getBoundingClientRect() : null;
-        toggleFade(page3Buy, inView(page3BuyRect));
+        toggleFade(page3Buy, inView(page3Rect));
 
         // ── Scroll snapping ───────────────────────────────────────────────────
         const page2OffsetTop = page2 ? page2.offsetTop : Infinity;
