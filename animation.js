@@ -290,8 +290,7 @@
         toggleFade(page2Title, inView(page2Rect));
         toggleFade(page2Articles, inView(page2Rect));
 
-        const page2BuyRect = page2Buy ? page2Buy.getBoundingClientRect() : null;
-        toggleFade(page2Buy, inView(page2BuyRect));
+        toggleFade(page2Buy, inView(page2Rect));
 
         // ── Page-3 fade in ────────────────────────────────────────────────────
         page3Title?.classList.add('page-fade');
